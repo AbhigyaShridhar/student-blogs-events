@@ -2,3 +2,4 @@ Django==3.1.5
 django-markdown-deux==1.0.5
 django-crispy-forms>=1.8.1
 Markdown>=3.0.1
+django-summernote
