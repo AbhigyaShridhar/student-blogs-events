@@ -1,0 +1,24 @@
+{% extends 'base_menu.html' %}
+
+{% block content %}
+
+
+{% block bootstrap %}
+	<style type="text/css">
+		#categories{
+			position: fixed;
+			display: flex;
+			flex-direction: column;
+			top: 100px;
+			left: 200px;
+		}
+	</style>
+{% endblock %}
+<ul id="categories">
+	{% for cat in categories %}
+		<li>
+            <a href="{% url 'events:category' cat.id %}">{{ cat }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

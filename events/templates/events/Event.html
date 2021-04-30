@@ -1,0 +1,35 @@
+{% extends 'base_menu.html' %}
+{% load markdown_deux_tags %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block content %}
+	{% if event.content_type %}
+		<div id="overlay" class="overlay" style="text-align: center;">
+		<img style="width:70%;margin-top: 50px; border:3px solid black;" src="{% url 'events:event_poster' event.id %}">
+		</div>
+	{% endif %}
+	<br>
+	<div id="event">
+	{{ entry|safe }}
+	<br>
+	<form action="{% url 'events:Eregister' event.title %}">
+		{% if request.user not in event.participants.all %}
+			<input type="submit" value="Participate">
+		{% else %}
+			<input type="submit" value="Cancel Participation">
+		{% endif %}
+	</form>
+	<br>
+	{% if request.user == event.admin %}
+		<form method="post" action="{% url 'events:Ecancel' event.title %}">
+			{% csrf_token %}
+			<input type="submit" value="Remove event">
+		</form>
+		<br>
+		<a href="{% url 'events:Edetails' event.id %}">View Participants</a>
+	{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+#upload_form{
+  position: absolute;
+  left: 12%;
+}
+
+#upload_form .controls textarea{
+  width: 800px;
+  height: 300px;
+}
+
+#upload_form .controls #id_local {
+  width: 160px;
+}
+
+#upload_form .controls input {
+  width: 800px;
+}
+
+.btn{
+  width: 10%;
+}

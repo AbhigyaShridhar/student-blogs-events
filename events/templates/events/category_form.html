@@ -1,0 +1,22 @@
+{% extends 'base_menu.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block bootstrap %}
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="main">
+    <p>
+  <form action="{% url 'events:add-category' %}" method="post" id="upload_form" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+            <input autofocus class="form-control" type="text" name="title" placeholder="Add Category">
+        </div>
+        <br>
+    <input type="submit" value="Submit" class="btn">
+  </form>
+</p>
+</div>
+{% endblock %}

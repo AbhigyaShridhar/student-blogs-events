@@ -1,0 +1,86 @@
+{% extends 'base_menu.html' %}
+{% block title %}{{ settings.APP_NAME }}{% endblock %}
+{% load humanize %} <!-- https://docs.djangoproject.com/en/3.0/ref/contrib/humanize -->
+
+{% load static %}
+
+{% block bootstrap %}
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/post.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<span id="update" style="float: right;">
+    Updated At -
+({{ post.updated_at|naturaltime }})
+{% if post.owner == user %}
+<a href="{% url 'events:post_update' post.id %}"><i class="fa fa-pencil"></i></a>
+<a href="{% url 'events:post_delete' post.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</span>
+
+
+<h1 id="title">{{ post.title }}</h1>
+{% if post.content_type %}
+<img style="float:right; max-width:50%;" src="{% url 'events:post_picture' post.id %}"
+    onclick="document.getElementById('overlay').style.display = 'block';">
+{% endif %}
+<div class="container">
+<div id="content">
+{{ post.content|safe }}
+</div>
+
+{% if tags is not None %}
+<p id="tags">
+	Along with - {% for tag in tags %}
+					<a href="{% url 'events:profile' tag.id %}">{{ tag.username }}</a>
+				 {% endfor %}
+</p>
+{% endif %}
+
+<p id="created">
+    created at -
+({{ post.created_at|naturaltime }})
+</p>
+{% if user.is_authenticated %}
+
+
+
+
+<br clear="all"/>
+<p>
+{% load crispy_forms_tags %}
+<form method="post" action="{% url 'events:post_comment_create' post.id %}">
+    {% csrf_token %}
+    {{ comment_form|crispy }}
+
+<input type="submit" value="Submit" class="btn btn-primary ">
+</form>
+</p>
+
+{% endif %}
+{% for comment in comments %}
+<p class="com"> {{ comment.text }} - {{ comment.owner.username }}
+({{ comment.created_at|naturaltime }})
+{% if user == comment.owner %}
+<a href="{% url 'events:post_comment_delete' comment.id %}"><i class="fa fa-trash"></i></a>
+{% endif %}
+</p>
+<br>
+{% endfor %}
+</div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function favPost(url, post_id) {
+            $.post(url, {},  function(rowz){
+                $("#unfavorite_star_"+post_id).toggle();
+                $("#favorite_star_"+post_id).toggle();
+            }).fail(function(xhr) {
+                alert('Url failed with '+xhr.status+' '+url);
+            });
+        }
+    </script>
+{% endblock %}

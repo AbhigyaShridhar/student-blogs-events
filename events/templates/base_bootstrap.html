@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/home.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/events.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/post_form.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Psoppins%26display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.6.2/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/sidenav.css' %}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/post.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/profile.css' %}">
+
+
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"
+    crossorigin="anonymous"></script>
+
+	<script
+  	src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  	crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/v4-shims.css">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/nav.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'events/css/event_form.css' %}">
+	<link rel="stylesheet" href="{% static 'events/css/notification.css' %}">
+
+	{% block head %}
+	{% endblock %}
+	<title>{% block title %}
+	{% endblock %}</title>
+</head>
+
+<body>
+	<nav id="top">
+		<div class="logo">
+			<a href="{% url 'events:home' %}"><h4>IIITU</h4></a>
+		</div>
+		<ul class="nav-links">
+			<li>
+				<a href="{% url 'events:events' %}">Events</a>
+			</li>
+			{% if user.is_authenticated %}
+			<li>
+				<a href="{% url 'events:logout' %}">Log Out</a>
+			</li>
+			{% else %}
+			<li>
+				<a href="{% url 'events:login' %}">Login/SignUp</a>
+			</li>
+			{% endif %}
+			<li>
+				<a href="#">Contact</a>
+			</li>
+			<li class="nav-item dropdown">
+                  <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-bell blue-color"></i>{{ notification_count }}
+                  </a>
+                    <ul class="dropdown-menu">
+                      <li class="head text-light bg-dark">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12 col-12">
+                            <span>Notifications ({{ notification_count }})</span>
+														{% if user.is_authenticated %}
+                            <strong><a href="{% url 'events:delete_notifications' %}" class="float-right text-primary">Mark all as read</a></strong>
+														{% endif %}
+                          </div>
+                      </li>
+											{% if user.is_authenticated %}
+											{% for n in notifications %}
+                      <li class="notification-box bg-gray">
+                        <div class="row">
+                          <div class="col-lg-8 col-sm-8 col-8">
+                            <div>
+                              {{ n.text }}
+                            </div>
+                            <small class="text-warning">{{ n.timestamp }}</small>
+                          </div>
+                        </div>
+                      </li>
+											{% endfor %}
+											{% endif %}
+                    </ul>
+                </li>
+
+		</ul>
+		<div class="burger">
+			<div class="line1"></div>
+			<div class="line2"></div>
+			<div class="line3"></div>
+		</div>
+	</nav>
+<br><br><br>
+	{% block body %}
+
+	{% endblock %}
+	{% block script %}
+
+	{% endblock %}
+	<script type="text/javascript" src="{% static 'events/src/navbar.js' %}"></script>
+</body>
+
+</html>

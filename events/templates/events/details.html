@@ -1,0 +1,37 @@
+{% extends 'base_menu.html' %}
+
+{% block bootstrap %}
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+	Total Participants = {{ count }}
+	<br>
+	<br>
+  <a href="{% url 'events:mail' pk %}">Send an email to all participants</a>
+	<table>
+	{% for p in participants %}
+	<tr>
+		<th>{{ p.first_name }} {{ p.last_name }}</th>
+		<th>{{ p.email }}</th>
+		<th>{{ p.college }}</th>
+	</tr>
+	{% endfor %}
+	</table>
+{% endblock %}

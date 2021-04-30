@@ -1,0 +1,45 @@
+{% extends "base_menu.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block bootstrap %}
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/form.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/post_form.css' %}">
+{% endblock %}
+
+{% block content %}
+<div id="main">
+<ul>
+  <form method=Post>
+      {% csrf_token %}
+      <div class="form-group" id="post">
+        <input class="form-control" autofocus="" type="Char" name="title" placeholder="Enter a title for your post" value="{{ title }}">
+      </div>
+      <br>
+      <div class="form-group" id="post">
+        <input class="form-control" autofocus="" type="Text" name="description" placeholder="Give your post a brief description" value="{{ description }}">
+      </div>
+      <br>
+      <div class="form-group" id="post">
+      {{ form|crispy|safe }}
+      {% if not request.user.is_guest %}
+      {{ postform|crispy }}
+      {% endif %}
+      {{ cform|crispy }}
+      <br>
+      </div>
+      <br>
+      <div class="form-group" id="post">
+        <input class="form-control" autofocus="" type="Text" name="tag" placeholder="To tag users, write their roll numbers separated by a space">
+      </div>
+      <br>
+      <div class="form-group" id="post">
+        <input class="btn btn-primary" type="submit" value="Share">
+      </div>
+  </form>
+  <br>
+  <br>
+  <br>
+</ul>
+</div>
+{% endblock %}

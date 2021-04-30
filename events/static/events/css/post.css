@@ -1,0 +1,46 @@
+#title{
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+
+#content{
+  position: relative;
+  width: 80%;
+  left: 10%;
+  padding: 2%;
+  border-radius: 5px;
+}
+
+#tags{
+  position: relative;
+  left: 10%;
+  width: 50%;
+}
+
+#created{
+  position: relative;
+  left: 65%;
+  width: 20%;
+}
+
+#div_id_comment{
+  position: relative;
+  left: 8%;
+  width: 50%;
+}
+
+#div_id_comment .textinput{
+  width: 930px;
+}
+
+.btn {
+  position: relative;
+  left: 10%;
+}
+
+.com{
+  position: relative;
+  left: 10%;
+  width: 70%;
+}

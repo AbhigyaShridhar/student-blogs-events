@@ -1,0 +1,36 @@
+{% extends "events/register.html" %}
+
+{% block title %}
+	Login
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h2>Login</h2>
+<br>
+    {% if message %}
+        <div>{{ message }}</div>
+        <br>
+    {% endif %}
+
+    <form action="{% url 'events:login' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="Integer" name="rollno" placeholder="Roll Number">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Login">
+    </form>
+<br>
+    Don't have an account? <a href="{% url 'events:register' %}">Register here.</a>
+    <br>
+    Not a IIITU Student? You need a temperory guest account to be able to participate in events
+    <a href="{% url 'events:guest_login' %}">Login as a guest</a>
+    <br>
+    <a href="{% url 'events:faculty_login' %}">Faculty Login</a>
+</div>
+{% endblock %}

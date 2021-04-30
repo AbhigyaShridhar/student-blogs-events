@@ -1,0 +1,53 @@
+{% extends "base_bootstrap.html" %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'events/css/log.css' %}">
+{% endblock %}
+
+{% block title %}
+	Register
+{% endblock %}
+
+{% block body %}
+<div class="container" id="form">
+	<h2>Register</h2>
+
+    <br>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+<br>
+    <form action="{% url 'events:faculty_register' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="email" placeholder="Email">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="first_name" placeholder="First Name">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="last_name" placeholder="Last Name">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <br>
+        <div class="form-group">
+            <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+        </div>
+        <br>
+        <input class="btn btn-primary" type="submit" value="Register">
+    </form>
+<br>
+    Already have an account? <a href="{% url 'events:faculty_login' %}">Log In here.</a>
+</div>
+{% endblock %}

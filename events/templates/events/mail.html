@@ -1,0 +1,29 @@
+{% extends "base_bootstrap.html" %}
+
+{% block title %}
+	Send Emails
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	<h2>Mass Mail</h2>
+<br>
+    {% if message %}
+        <div>{{ message }}</div>
+        <br>
+    {% endif %}
+
+    <form action="{% url 'events:mail' pk %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input autofocus class="form-control" type="text" name="subject" placeholder="Subject">
+        </div>
+        <br>
+        <div class="form-group">
+            <input autofocus class="form-control" type="textarea" name="message" placeholder="Type the message here">
+        </div>
+        <br>
+        <input class="btn btn-primary" type="submit" value="SEND">
+    </form>
+<br>
+{% endblock %}
