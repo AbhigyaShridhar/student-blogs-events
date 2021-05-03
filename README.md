@@ -25,7 +25,7 @@ It is added as an app in the "iiitu/settings.py" file.
 All the models can be seen in "events/models.py" file. The default user model is set as "User" which inherits Django's default user class
 
 ## Authentication
-There are 4 types of users defined through create functions. superuser, user, guest_user and facult.
+There are 4 types of users defined through create functions. superuser, user, guest_user and faculty(defined in models.py).
 All the user types have different data specifications which is defined in each of their create functions.
 To keep the login method of all the users as email, the default authentication back end of django has been edited.
 The backend used can be viewed at "events/authentication.py".
