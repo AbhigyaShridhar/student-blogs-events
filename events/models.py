@@ -129,8 +129,8 @@ class User(AbstractBaseUser):
     branch = models.CharField(max_length=3, choices=Branch_CHOICES, default="CSE")
     rollNo = models.CharField(validators=[MinLengthValidator(5)], max_length=5, blank=True)
 
-    profile_pic = models.ImageField(blank=True, null=True, editable=True, upload_to="profile_image")
-    content_type = models.CharField(max_length=256, null=True, help_text='The MIMEType of the file')
+    #profile_pic = models.ImageField(blank=True, null=True, editable=True, upload_to="profile_image")
+    #content_type = models.CharField(max_length=256, null=True, help_text='The MIMEType of the file')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username', 'year', 'branch', 'first_name', 'last_name']
